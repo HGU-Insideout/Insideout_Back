@@ -1,5 +1,6 @@
 package com.example.insideout.domain;
 
+import com.example.insideout.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,15 +10,14 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User extends Basetime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;  // 사용자 ID
+    private Long Id;  // 사용자 ID
 
     @Column(nullable = false)
-    private String id;  // 사용자 로그인 ID
+    private String username;  // 사용자 로그인 ID
 
     @Column(nullable = false)
     private String password;  // 사용자 비밀번호
@@ -34,16 +34,18 @@ public class User {
     private String domitory; // 생활관 정보
 
     private String insurance; // 건강 보험 여부
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private UserDetail userDetail;  // UserDetail과 1:1 관계
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private UserServey userSurvey;  // UserSurvey와 1:1 관계
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Checklist checklist;  // Checklist와 1:1 관계
 
+    public static User toUser(UserDto userDto){
+        return User.builder()
+                .username(userDto.getUsername())
+                .password(userDto.getPassword())
+                .phone(userDto.getPhone())
+                .gender(userDto.getGender())
+                .birthday(userDto.getBirthday())
+                .domitory(userDto.getDomitory())
+                .insurance(userDto.getInsurance())
+                .build();
+    }
 
 
 }

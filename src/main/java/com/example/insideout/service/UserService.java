@@ -1,37 +1,30 @@
 package com.example.insideout.service;
 
+import com.example.insideout.controller.form.UserForm;
 import com.example.insideout.domain.User;
+import com.example.insideout.dto.UserDto;
 import com.example.insideout.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
+    public Long createUser(UserDto userDto) {
+        User user = userRepository.save(User.toUser(userDto));
+        return user.getId();
+    }
 
     public User findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
-
-
-    public User updateUser(Long id, User userDetails) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setPhone(userDetails.getPhone());
-        user.setBirthday(userDetails.getBirthday());
-        return userRepository.save(user);
-    }
-
+    // updageUSer
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
