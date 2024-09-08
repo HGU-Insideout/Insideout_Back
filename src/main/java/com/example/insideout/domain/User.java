@@ -34,15 +34,15 @@ public class User {
     private String domitory; // 생활관 정보
 
     private String insurance; // 건강 보험 여부
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserDetail userDetail;  // UserDetail과 1:1 관계
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserServey userSurvey;  // UserSurvey와 1:1 관계
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Checklist checklist;  // Checklist와 1:1 관계
+//
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private UserDetail userDetail;  // UserDetail과 1:1 관계
+//
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private UserServey userSurvey;  // UserSurvey와 1:1 관계
+//
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Checklist checklist;  // Checklist와 1:1 관계
 
 
 
