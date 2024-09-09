@@ -1,8 +1,10 @@
 package com.example.insideout.dto;
 
 import com.example.insideout.controller.form.UserForm;
+import com.example.insideout.domain.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -25,6 +27,8 @@ public class UserDto {
     private String insurance; // 건강 보험 여부
 
 
+
+
     public static UserDto from(UserForm userForm) {
         return UserDto.builder()
                 .username(userForm.getUsername())
@@ -33,7 +37,19 @@ public class UserDto {
                 .gender(userForm.getGender())
                 .birthday(userForm.getBirthday())
                 .domitory(userForm.getDomitory())
-                .insurance(userForm.getDomitory())
+                .insurance(userForm.getInsurance())
+                .build();
+    }
+
+    public static UserDto from(User user) {
+        return UserDto.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .phone(user.getPhone())
+                .gender(user.getGender())
+                .birthday(user.getBirthday())
+                .domitory(user.getDomitory())
+                .insurance(user.getInsurance())  // User 객체에서 보험 정보를 가져온다고 가정
                 .build();
     }
 

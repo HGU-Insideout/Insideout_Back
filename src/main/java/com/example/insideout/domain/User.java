@@ -47,5 +47,16 @@ public class User extends Basetime{
                 .build();
     }
 
+    public void update(UserDto userDto) {
+        this.username = userDto.getUsername();
+        this.password = userDto.getPassword();
+        this.phone = userDto.getPhone();
+        this.gender = userDto.getGender();
+        this.birthday = userDto.getBirthday();
+        this.domitory = userDto.getDomitory();
+        this.insurance = userDto.getInsurance();
+
+    }
+
 
 }

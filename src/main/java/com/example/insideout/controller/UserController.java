@@ -3,6 +3,7 @@ package com.example.insideout.controller;
 import com.example.insideout.controller.form.UserForm;
 import com.example.insideout.controller.response.ApiResponse;
 import com.example.insideout.controller.response.UserIdResponse;
+import com.example.insideout.controller.response.UserListResponse;
 import com.example.insideout.domain.User;
 import com.example.insideout.dto.UserDto;
 import com.example.insideout.service.UserService;
@@ -20,7 +21,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<ApiResponse> createUser(@RequestBody UserForm userForm) {
         System.out.println("createUser");
-        Long userId = userService.createUser(UserDto.from(userForm));
+        Long userId = userService.createUser(UserDto.from(userForm)); //UserForm 객체를 UserDto로 변환
         ApiResponse response = new UserIdResponse(userId);
         return ResponseEntity.ok(response);
     }
@@ -31,9 +32,37 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return ResponseEntity.ok().build();
+        ApiResponse response = new UserIdResponse(id);
+        return ResponseEntity.ok(response);
     }
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ApiResponse> updateUser(@PathVariable Long id, @RequestBody UserForm userForm) {
+       userService.updateUser(id, UserDto.from(userForm));
+       ApiResponse response = new UserIdResponse(id);
+       return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<ApiResponse> detailUser(@PathVariable Long id){
+        UserDto userdto = userService.detailUser(id);
+        ApiResponse response = new UserIdResponse(id);
+        System.out.println(userdto);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<UserListResponse> getUserList() {
+        UserListResponse userListResponse = userService.getUserList();
+        return ResponseEntity.ok(userListResponse);
+    }
+
+
+
+
+
 
 }
