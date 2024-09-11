@@ -1,5 +1,7 @@
 package com.example.insideout.domain;
 
+import com.example.insideout.dto.UserDetailDto;
+import com.example.insideout.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +28,19 @@ public class UserDetail extends Basetime {
     private String type; // 장애 유형
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id") // UserDetail 테이블의 user_id 컬럼이 User 엔티티의 pk와 매핑 / UserDetail에서 User 객체에 접근 가능하게 함
     private User user;
+
+
+    public static UserDetail toUserDetail(UserDetailDto userDetailDto, User user){
+        return UserDetail.builder()
+                .center(userDetailDto.getCenter())
+                .disabilityStatus(userDetailDto.getDisabilityStatus())
+                .interest(userDetailDto.getInterest())
+                .enter(userDetailDto.getEnter())
+                .type(userDetailDto.getType())
+                .user(user)
+                .build();
+    }
+
 }

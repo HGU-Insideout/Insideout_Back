@@ -1,5 +1,7 @@
 package com.example.insideout.domain;
 
+import com.example.insideout.dto.UserDetailDto;
+import com.example.insideout.dto.UserServeyDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +30,16 @@ public class UserServey extends Basetime {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public static UserServey toUserServey(UserServeyDto userServeylDto, User user){
+        return UserServey.builder()
+                .depression(userServeylDto.getDepression())
+                .mentalIllness(userServeylDto.getMentalIllness())
+                .alcohol(userServeylDto.getAlcohol())
+                .stress(userServeylDto.getStress())
+                .mentalIndex(userServeylDto.getMentalIndex())
+                .user(user)
+                .build();
+    }
+
 }

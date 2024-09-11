@@ -2,7 +2,9 @@ package com.example.insideout.service;
 
 import com.example.insideout.controller.response.UserListResponse;
 import com.example.insideout.domain.User;
+import com.example.insideout.domain.UserDetail;
 import com.example.insideout.dto.UserDto;
+import com.example.insideout.repository.UserDetailRepository;
 import com.example.insideout.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
 
     public Long createUser(UserDto userDto) {
         User user = userRepository.save(User.toUser(userDto));
@@ -51,4 +54,10 @@ public class UserService {
         List<User> user = userRepository.findAll();
         return new UserListResponse(user);
     }
+
+    private final UserDetailRepository userDetailRepository;
+
+
+
+
 }
